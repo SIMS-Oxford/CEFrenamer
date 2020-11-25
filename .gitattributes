@@ -1,0 +1,3 @@
+# Set git to always checkout with lf (unix) line endings.
+
+*.bash text eol=lf
