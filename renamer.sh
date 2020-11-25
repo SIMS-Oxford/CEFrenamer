@@ -20,14 +20,19 @@ else
 	name="eventlist.cef"
 fi
 
+## check for trailing slash in filename
+if [[ ! "$1" = */ ]]; then
+	dir="$1\/"
+else
+	dir="$1"
+fi
+
 ## find eventlist files and rename
-for file in $1*$name*;
+for file in $dir*$name*;
 do
-subject="$( basename $file | head -c 8)";
-code=$( basename $(find $1*$subject*_raw* -print -quit) | cut -d'_' -f2);
-newfile="${file/$name/$code}.cef";
-cp $file $newfile;
-echo "Copied ${file} to ${newfile}";
+	subject="$( basename $file | head -c 8)";
+	code=$( basename $(find $dir*$subject*_raw* -print -quit) | cut -d'_' -f2);
+	newfile="${file/$name/$code}_raw.cef";
+	cp $file $newfile;
+	echo "Copied ${file} to ${newfile}";
 done
-
-
