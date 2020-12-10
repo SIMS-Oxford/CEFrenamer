@@ -3,8 +3,8 @@ This is a small script tat can be used to rename eventlist (or other) files to m
 
 ## Use
 In order to set up ready to use:-
-1. Download this repository using git, or the green button in github
-2. Open the terminal
+1. Open the terminal
+2. Download this script using Git: `git clone https://github.com/simonmarchant/Paedneurorenamer.git`
 3. Use cd (change directory) to navigate to the folder this file is in
 4. Give it executable permission using `chmod +x ./renamer.sh`
 
@@ -21,3 +21,4 @@ An example of use is shown below.
 ## Advanced use
 * You can specify the filename end of files to rename. To do so, use the second argument when calling the script, ie. `./renamer.sh <directory-to-check> <filename>`.
 * If you forget to include any arguments, the script will prompt you to type in the name of the directory to look in.
+* Please note that downloading directly from Github may cause line end errors. This is a known bug and the workaround is to download using Git as described above.
