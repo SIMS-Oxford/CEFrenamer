@@ -13,6 +13,14 @@
 # eg. ./renamer.sh ./Ox0010101
 # S Marchant 2020 simon.marchant@paediatrics.ox.ac.uk
 
+## check for no input arguments
+if [ $# -eq 0 ]; then
+	echo "Enter directory to rename eventlist files in:"
+	read dir
+else
+	dir="$1"
+fi
+
 ## name in eventlist files
 if [ "$2" != "" ]; then
 	name=$2
@@ -20,18 +28,16 @@ else
 	name="eventlist.cef"
 fi
 
-## check for trailing slash in filename
-if [[ ! "$1" = */ ]]; then
-	dir="$1\/"
-else
-	dir="$1"
+## check for trailing slash in directory name
+if [[ ! "$dir" = */ ]]; then
+	dir="$dir\/"
 fi
 
 ## find eventlist files and rename
 for file in $dir*$name*;
 do
 	subject="$( basename $file | head -c 8)";
-	code=$( basename $(find $dir*$subject*_raw* -print -quit) | cut -d'_' -f2);
+	code=$( basename $(find $dir*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
 	newfile="${file/$name/$code}_raw.cef";
 	cp $file $newfile;
 	echo "Copied ${file} to ${newfile}";
