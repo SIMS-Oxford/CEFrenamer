@@ -1,5 +1,5 @@
 # Paedneuro Renamer
-This is a small script tat can be used to rename eventlist (or other) files to match the name format used in the rest of the directory they are in. It is specifically set up to help with renaming files matching the oxford paed neuro team's naming convention.
+This is a small script that can be used to rename eventlist (or other) files to match the name format used in the rest of the directory they are in. It is specifically set up to help with renaming files matching the oxford paed neuro team's naming convention.
 
 ## Use
 In order to set up ready to use:-
