@@ -34,10 +34,10 @@ if [[ ! "$dir" = */ ]]; then
 fi
 
 ## find eventlist files and rename
-for file in $dir*$name*;
+for file in $dir*$name* $dir**/*$name*;
 do
 	subject="$( basename $file | head -c 8)";
-	code=$( basename $(find $dir*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
+	code=$( basename $(find $dir*$subject* -print -quit) | rev | cut -d'_' -f2 | rev );
 	newfile="${file/$name/$code}_raw.cef";
 	cp $file $newfile;
 	echo "Copied ${file} to ${newfile}";
