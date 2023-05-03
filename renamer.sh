@@ -34,11 +34,21 @@ if [[ ! "$dir" = */ ]]; then
 fi
 
 ## find eventlist files and rename
-for file in $dir*$name* $dir**/*$name;
-do
-	subject="$( basename $file | head -c 8)";
-	code=$( basename $(find $dir*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
-	newfile="${file/$name/$code}raw.cef";
+if [[ -n $(find $dir*$name*) ]] ## if there's something in first level
+then for file in $dir*$name*;
+	do
+		subject="$( basename $file | head -c 8)";
+		code=$( basename $(find $dir*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
+		newfile="${file/$name/$code}_raw.cef";
+		mv $file $newfile;
+		echo "Renamed ${file} to ${newfile}";
+	done
+else for file in $dir**/*$name; ## if not check second level
+	do
+		subject="$( basename $file | head -c 8)";
+		code=$( basename $(find $dir**/*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
+		newfile="${file/$name/$code}_raw.cef";
 	mv $file $newfile;
-	echo "Renamed ${file} to ${newfile}";
-done
+		echo "Renamed ${file} to ${newfile}";
+	done
+fi
