@@ -39,6 +39,6 @@ do
 	subject="$( basename $file | head -c 8)";
 	code=$( basename $(find $dir*$subject*_raw* -print -quit) | rev | cut -d'_' -f2 | rev );
 	newfile="${file/$name/$code}raw.cef";
-	cp $file $newfile;
-	echo "Copied ${file} to ${newfile}";
+	mv $file $newfile;
+	echo "Renamed ${file} to ${newfile}";
 done
